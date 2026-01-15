@@ -1,2 +1,2 @@
-/static/uploads/
-.DS_Store
+static/upload/*
+!static/upload/.gitkeep
