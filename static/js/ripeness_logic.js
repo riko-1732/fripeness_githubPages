@@ -1,10 +1,6 @@
-/**
- * Python(OpenCV)のロジックをJavaScriptで完全再現したファイル
- * 基準: OpenCVのHSVスケール (H:0-179, S:0-255, V:0-255) に合わせて計算します
- */
-
+// ripeness_logic.js
 function calculateRipenessFromImage(imageElement) {
-  // 1. 画像をCanvasに描画してピクセルデータを取得
+  // 画像データを取得
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   canvas.width = imageElement.naturalWidth;
@@ -18,7 +14,7 @@ function calculateRipenessFromImage(imageElement) {
   let totalHue = 0;
   let brownPixelCount = 0;
 
-  // 2. 全ピクセルを走査
+  // 全ピクセルを走査
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i];
     const g = data[i + 1];
@@ -30,18 +26,14 @@ function calculateRipenessFromImage(imageElement) {
     const s = hsv.s;
     const v = hsv.v;
 
-    // --- バナナの範囲抽出 (extract_banana) ---
-    // Python: lower_white=[0,0,220], upper_white=[255,60,255]
-    // これに含まれると「背景(白)」。含まれないものが「バナナ」
+    // バナナピクセル判定 (is_Banana_Pixel)
     const isWhite = s <= 60 && v >= 220;
 
     if (!isWhite) {
       bananaPixelCount++;
       totalHue += h;
 
-      // --- シュガースポット判定 (calc_Spot_Bonus) ---
-      // Mask1: H[0-25], S[0-225], V[0-127]
-      // Mask2: H[170-179], S[0-225], V[0-127]
+      // シュガースポット判定 (calc_Spot_Bonus)
       const isBrown1 = h >= 0 && h <= 25 && s <= 225 && v <= 127;
       const isBrown2 = h >= 170 && h <= 179 && s <= 225 && v <= 127;
 
@@ -53,7 +45,7 @@ function calculateRipenessFromImage(imageElement) {
 
   if (bananaPixelCount === 0) return "0.00";
 
-  // 3. ベーススコア計算 (calc_Base_Score)
+  // ベーススコア計算 (calc_Base_Score)
   const meanH = totalHue / bananaPixelCount;
   const minH = 25; // FULL YELLOW
   const maxH = 40; // ALL GREEN
@@ -64,22 +56,18 @@ function calculateRipenessFromImage(imageElement) {
   } else if (meanH <= minH) {
     baseScore = 80;
   } else {
-    // 線形補間
     const ratio = (maxH - meanH) / (maxH - minH);
     baseScore = ratio * 80;
   }
 
-  // 4. ボーナススコア計算 (calc_Spot_Bonus)
+  // ボーナススコア計算 (calc_Spot_Bonus)
   const brownRatio = (brownPixelCount / bananaPixelCount) * 100;
   const bonusScore = brownRatio * 2.0;
 
-  // 5. 合計
   let totalScore = baseScore + bonusScore;
   return totalScore.toFixed(2);
 }
 
-// ヘルパー関数: RGBをOpenCV基準のHSVに変換する
-// H: 0-179, S: 0-255, V: 0-255
 function rgbToHsvOpenCV(r, g, b) {
   let rabs, gabs, babs, rr, gg, bb, h, s, v, diff, diffc, percentRoundFn;
   rabs = r / 255;

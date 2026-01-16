@@ -5,6 +5,6 @@
 
   "analyze": "Analyzing...",
 
-  "result-msg": "The ripeness of this banana is...",
+  "result_msg": "The ripeness of this banana is...",
   "return": "Return"
 }
