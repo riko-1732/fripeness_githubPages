@@ -24,7 +24,7 @@
       </div>
     </header>
 
-    <h3 data-i18n="title">
+    <h3 class="description" data-i18n="description">
       Upload an image of a banana <br />
       and the degree of ripeness <br />
       will be displayed!
@@ -38,7 +38,7 @@
         id="fileInput"
         required
       />
-      <label for="fileInput" class="file-label" data-i18n="label_select">
+      <label for="fileInput" class="file-label" data-i18n="file_select">
         Select Banana Image
       </label>
       <div id="preview"></div>
@@ -55,7 +55,9 @@
         <div class="loading-bar-container">
           <div class="loading-bar"></div>
         </div>
-        <p style="color: white; margin-top: 10px">Analyzing...</p>
+        <p style="color: white; margin-top: 10px" data-i18n="analyze">
+          Analyzing...
+        </p>
       </div>
     </div>
 

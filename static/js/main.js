@@ -44,12 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
       resultSection.style.display = "block";
       form.style.display = "none"; // フォームを隠す
 
-      // i18n対応のために属性をつけることも可能ですが、
       // ここではシンプルに結果を表示します
       resultContent.innerHTML = `
                 <div class="result-card">
                     <img src="${imageUrl}" alt="Analyzed Banana" style="max-width: 300px; border-radius: 10px; border: 3px solid #592d2d; margin-bottom: 20px;">
-                    <h3>Result</h3>
+                    <h3 data-i18n="result-msg">Result</h3>
                     <h4 style="font-size: 40px; color: #af0303;">${ripeness}%</h4>
                 </div>
             `;

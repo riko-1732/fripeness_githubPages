@@ -26,8 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function loadLanguage(lang) {
   try {
-    // Flaskの構成に合わせて絶対パスで指定
-    const response = await fetch(`/static/locales/${lang}.json`);
+    const response = await fetch(`static/locales/${lang}.json`);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
