@@ -6,5 +6,11 @@
   "analyze": "Analyzing...",
 
   "result_msg": "The ripeness of this banana is...",
-  "return": "Return"
+  "return": "Return",
+
+  "msg_green": "Wait a little longer!",
+  "msg_yellow": "Just a bit more!",
+  "msg_best": "It's about time to eat!",
+  "msg_ripe": "Fully ripe! Eat it soon!",
+  "msg_overripe": "It's overripe;; Better for baking"
 }
