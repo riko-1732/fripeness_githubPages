@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         img.src = e.target.result;
         img.alt = "Selected Image";
 
-        // スタイルの適用（CSSクラスを使うほうが綺麗ですが、JS内で完結させるならこのままでOK）
         img.style.maxWidth = "300px";
         img.style.height = "auto";
         img.style.border = "1px solid #ddd";

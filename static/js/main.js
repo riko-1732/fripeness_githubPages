@@ -1,9 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("uploadForm");
   const loadingOverlay = document.getElementById("loadingOverlay");
-  const resultSection = document.getElementById("resultSection"); // HTMLに復活させます
-  const resultContent = document.getElementById("resultContent"); // HTMLに復活させます
-  const retryButton = document.getElementById("retryButton"); // HTMLに復活させます
 
   if (!form) return;
 
@@ -14,54 +11,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const file = fileInput.files[0];
     if (!file) return;
 
-    // 1. ローディング表示
+    // ローディング表示
     if (loadingOverlay) loadingOverlay.style.display = "flex";
-    if (resultSection) resultSection.style.display = "none";
 
-    // 2. 画像を読み込んでJSで処理開始
+    // 画像を読み込む
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
 
-    img.onload = () => {
-      // ★ここでPythonの代わりにJSで計算！(一瞬で終わります)
-      // 少しだけローディングを見せる演出を入れる(500ms)
-      setTimeout(() => {
-        const ripeness = calculateRipenessFromImage(img);
+    // Base64形式に変換して保存するためのFileReader
+    const reader = new FileReader();
 
-        // 3. 結果を表示
-        showResult(objectUrl, ripeness);
+    reader.onload = function (event) {
+      const base64Image = event.target.result;
 
-        if (loadingOverlay) loadingOverlay.style.display = "none";
-      }, 800);
+      img.onload = () => {
+        setTimeout(() => {
+          // 計算実行 (ripeness_logic.jsの関数)
+          const ripeness = calculateRipenessFromImage(img);
+
+          // 結果と画像をSessionStorageに保存
+          sessionStorage.setItem("ripenessResult", ripeness);
+          sessionStorage.setItem("bananaImage", base64Image);
+
+          // 結果ページへ遷移
+          window.location.href = "result.html";
+        }, 800);
+      };
+      img.src = objectUrl;
     };
 
-    img.src = objectUrl;
+    // 画像をBase64として読み込む開始
+    reader.readAsDataURL(file);
   });
-
-  // 結果表示関数
-  function showResult(imageUrl, ripeness) {
-    if (resultSection && resultContent) {
-      resultSection.style.display = "block";
-      form.style.display = "none"; // フォームを隠す
-
-      // ここではシンプルに結果を表示します
-      resultContent.innerHTML = `
-                <div class="result-card">
-                    <img src="${imageUrl}" alt="Analyzed Banana" style="max-width: 300px; border-radius: 10px; border: 3px solid #592d2d; margin-bottom: 20px;">
-                    <h3 data-i18n="result-msg">Result</h3>
-                    <h4 style="font-size: 40px; color: #af0303;">${ripeness}%</h4>
-                </div>
-            `;
-    }
-  }
-
-  // リトライボタンの処理
-  if (retryButton) {
-    retryButton.addEventListener("click", () => {
-      resultSection.style.display = "none";
-      form.style.display = "flex"; // フォームを再表示
-      document.getElementById("preview").innerHTML = ""; // プレビュークリア
-      form.reset();
-    });
-  }
 });

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fripeness - Result</title>
+    <link rel="stylesheet" href="static/css/styles.css" type="text/css" />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a href="./">
+        <img
+          src="static/images/fripeness_logo.png"
+          alt="logo"
+          class="site-logo"
+        />
+      </a>
+      <div class="lang-switch">
+        <select id="languageSelector" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+        </select>
+      </div>
+    </header>
+
+    <div
+      class="center-container"
+      style="flex-direction: column; height: auto; margin-top: 20px"
+    >
+      <div id="preview" style="margin: 20px 0; text-align: center">
+        <img
+          id="resultImage"
+          src=""
+          alt="Analyzed Banana"
+          style="
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            border: 3px solid #592d2d;
+          "
+        />
+      </div>
+
+      <h3 data-i18n="result_msg">The ripeness of this banana is...</h3>
+
+      <h4 id="resultScore" style="font-size: 40px">--%</h4>
+      <div id="resultMessage" style="margin-top: 10px; font-size: 20px;">
+        <p id="msg_green" data-i18n="msg_green" style="display: none;">
+        </p>
+        <p id="msg_yellow" data-i18n="msg_yellow" style="display: none;">
+        </p>
+        <p id="msg_best" data-i18n="msg_best" style="display: none;">
+        </p>
+        <p id="msg_ripe" data-i18n="msg_ripe" style="display: none;">
+        </p>
+        <p id="msg_overripe" data-i18n="msg_overripe" style="display: none;">
+        </p>
+
+      <button onclick="window.location.href='./'" data-i18n="return">
+        Return
+      </button>
+    </div>
+
+    <script src="static/js/i18n.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ripeness = sessionStorage.getItem("ripenessResult");
+        const imageData = sessionStorage.getItem("bananaImage");
+
+        if (!ripeness || !imageData) {
+          window.location.href = "./";
+          return;
+        }
+
+        document.getElementById("resultScore").textContent = ripeness + "%";
+        document.getElementById("resultImage").src = imageData;
+
+        const score = parseFloat(ripeness);
+        if (score < 40){
+          targetId = "msg_green";
+        } else if (score < 70){
+          targetId = "msg_yellow";
+        } else if (score < 85){
+          targetId = "msg_best";
+        } else if (score < 100){
+          targetId = "msg_ripe";
+        } else {
+          targetId = "msg_overripe";
+        }
+        if (targetId){
+          document.getElementById(targetId).style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

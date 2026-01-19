@@ -5,6 +5,12 @@
 
   "analyze": "解析中...",
 
-  "result-msg": "このバナナの熟成度は...",
-  "return": "戻る"
+  "result_msg": "このバナナの熟成度は...",
+  "return": "戻る",
+
+  "msg_green": "もっと待とう！",
+  "msg_yellow": "あとちょっと待とう！",
+  "msg_best": "そろそろ食べごろ！",
+  "msg_ripe": "完熟！早く食べよう！",
+  "msg_overripe": "熟れすぎてる、お菓子作りに向いてるかも"
 }
