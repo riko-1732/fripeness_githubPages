@@ -269,3 +269,31 @@ button:active {
     padding-top: 150px;
   }
 }
+
+/* バナナ落とすやつ */
+
+.banana-fall {
+  position: fixed;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.banana {
+  position: absolute;
+  font-size: 24px;
+  animation: fall 10s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
