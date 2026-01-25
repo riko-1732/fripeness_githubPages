@@ -269,3 +269,34 @@ button:active {
     padding-top: 150px;
   }
 }
+
+@media (max-width: 768px) {
+  header {
+    max-height: 90px;
+  }
+
+  .site-header {
+    padding: 8px 12px;
+  }
+
+  header img {
+    max-height: 60px;
+  }
+
+  body {
+    padding-top: 90px;
+  }
+
+  /* 右上ボタン周りも少し詰める */
+  #openHelp {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+  }
+
+  #languageSelector {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
