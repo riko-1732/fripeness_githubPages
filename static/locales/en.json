@@ -1,4 +1,14 @@
 {
+  "help_btn": "Help",
+  "help_title": "About fripeness",
+  "help_desc": "Upload a banana image to analyze its ripeness level.",
+  "help_level1": "0-39%: Wait a little longer!",
+  "help_level2": "40-69%: Just a bit more!",
+  "help_level3": "70-85%: It's about time to eat!",
+  "help_level4": "86-99%: Fully Ripe! Eat it soon!",
+  "help_level5": "100% ~ : It's overripe;; Better for baking",
+  "btn_close": "Close",
+
   "description": "Upload an image of a banana <br> and the degree of ripeness <br> will be displayed!",
   "file_select": "Select Banana Image",
   "btn_submit": "Check Ripeness!",

@@ -1,73 +1,63 @@
 @charset "utf-8";
 
-/* =========================================
-   1. 基本設定 (Base Styles)
-   ========================================= */
+* {
+  box-sizing: border-box;
+}
+
 body {
   padding-top: 150px;
   padding-bottom: 100px;
+  margin: 0;
+  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  min-height: 100vh;
-  height: auto;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+
+  background-color: #fff9e6;
   text-align: center;
-  background-color: #fdf5f3;
+
+  font-family: "Press Start 2P", "Arial Rounded MT Bold", Arial, sans-serif;
 }
 
 h3 {
   margin: 20px;
-  font-size: 22px;
-  color: #262626;
+  font-size: 20px;
+  color: #5d4037;
 }
 
 h4 {
   margin: 20px;
-  font-size: 32px;
-  color: #000000;
+  font-size: 28px;
+  color: #4a3a10;
 }
 
-.center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-/* =========================================
-   2. ヘッダー & ロゴ (Header & Logo)
-   ========================================= */
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+
   width: 100%;
   max-height: 150px;
-  background-color: #e47068;
+
+  background-color: #ffe135;
+  border-bottom: 4px solid #5d4037;
+
   z-index: 10000;
-  margin: 0;
-  box-sizing: border-box;
-  text-align: center;
 }
 
-/* クラス指定のヘッダーレイアウト */
 .site-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+
+  padding: 12px 24px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 header img {
   max-height: 100px;
-  max-width: 100%;
   height: auto;
   display: block;
 }
@@ -78,158 +68,182 @@ header img {
 }
 
 #languageSelector {
-  padding: 5px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 6px 10px;
+  font-size: 14px;
+
+  border-radius: 12px;
+  border: 2px solid #5d4037;
+
+  background-color: #fff3c4;
+  color: #5d4037;
+
   cursor: pointer;
-  margin-right: 5px;
 }
 
-/* =========================================
-   3. フォーム & ボタン (Form & Buttons)
-   ========================================= */
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 #fileInput {
-  display: none; /* input type="file" を隠す */
+  display: none;
 }
 
 .file-label {
-  display: inline-block;
-  padding: 20px 40px;
-  background-color: #e96d60e5;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
+  padding: 18px 36px;
+
+  background-color: #f7e07a;
+  color: #5d4037;
+
+  border: 3px solid #5d4037;
+  border-radius: 18px;
+
+  font-size: 14px;
+  font-weight: bold;
+
   cursor: pointer;
-  transition: background-color 0.3s ease;
+
+  box-shadow: 0 4px 0 #5d4037;
+  transition: all 0.15s ease;
 }
 
 .file-label:hover {
-  background-color: #815652e5;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #5d4037;
 }
 
 button {
-  padding: 20px 40px;
-  background-color: #af0303;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
+  margin-top: 24px;
+  padding: 18px 36px;
+
+  background-color: #8b5a2b;
+  color: #fff3c4;
+
+  border: 3px solid #5d4037;
+  border-radius: 18px;
+
+  font-size: 14px;
+  font-weight: bold;
+
   cursor: pointer;
-  border: none;
-  margin-top: 20px;
-  align-items: center;
+
+  box-shadow: 0 4px 0 #5d4037;
+  transition: all 0.15s ease;
 }
 
 button:hover {
-  background-color: #6b0404;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #5d4037;
 }
 
-/* =========================================
-   4. プレビューエリア (Preview Area)
-   ========================================= */
+button:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
 #preview {
   margin: 20px 0;
-  text-align: center;
-  min-height: 20px; /* 画像がない時もガタつきを防ぐ */
+  min-height: 20px;
 }
 
 #preview img {
   max-width: 100%;
   max-height: 300px;
-  height: auto;
-  outline: 3px solid #592d2d;
+
+  border-radius: 16px;
+  border: 4px solid #f7e07a;
 }
 
-/* =========================================
-   5. ローディング画面 (Loading Screen)
-   ========================================= */
-/* 新しいオーバーレイ形式 */
 .overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* 少し透けた黒背景 */
-  z-index: 9999; /* 最前面に */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  inset: 0;
 
-/* 旧ローディング形式（必要に応じて削除可） */
-#loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: transparent;
+  background-color: rgba(255, 225, 53, 0.85);
+  z-index: 9999;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-  flex-direction: column;
 }
 
 .loading-content {
   text-align: center;
 }
 
-#banana-image {
-  width: 10%;
-  margin-bottom: 20px;
-}
-
 .loading-banana {
-  width: 100px;
-  animation: bounce 1s infinite alternate;
+  width: 90px;
+  animation: bounce 0.8s infinite alternate;
 }
 
-/* --- プログレスバー関連 --- */
-#loading-bar-container,
+/* プログレスバー */
 .loading-bar-container {
-  width: 200px; /* .loading-bar-containerの設定を優先 */
-  height: 10px;
-  background-color: #ddd;
-  border-radius: 5px; /* .loading-bar-containerの設定を優先 */
+  width: 220px;
+  height: 12px;
+
+  background-color: #fff3c4;
+  border: 3px solid #5d4037;
+  border-radius: 10px;
+
   margin: 20px auto;
   overflow: hidden;
-  position: relative;
-}
-
-#loading-bar {
-  width: 0;
-  height: 100%;
-  background-color: #ffcc00;
-  animation: loading 3s linear infinite;
 }
 
 .loading-bar {
   width: 50%;
   height: 100%;
-  background-color: #f1c40f;
+
+  background-color: #f7e07a;
   animation: loading-slide 1s infinite linear;
 }
 
-/* =========================================
-   6. アニメーション (Keyframes)
-   ========================================= */
-@keyframes loading {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
+#openHelp {
+  background-color: #ffe135;
+  color: #5d4037;
+  margin-bottom: 12px;
+
+  border: 3px solid #5d4037;
+  border-radius: 20px;
+
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 0 #5d4037;
+  transition: all 0.15s ease;
+}
+
+#openHelp:hover {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #5d4037;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 20000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fffdf5;
+
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+
+  border-radius: 20px;
+  border: 4px solid #f7e07a;
+
+  box-shadow: 0 6px 0 #e0c35a;
+  text-align: left;
 }
 
 @keyframes bounce {
@@ -237,7 +251,7 @@ button:hover {
     transform: translateY(0);
   }
   to {
-    transform: translateY(-20px);
+    transform: translateY(-16px);
   }
 }
 
@@ -250,15 +264,7 @@ button:hover {
   }
 }
 
-/* =========================================
-   7. レスポンシブ設定 (Media Queries)
-   ========================================= */
 @media (min-width: 1200px) {
-  header img {
-    max-height: 100px;
-    margin: 0;
-  }
-
   body {
     padding-top: 150px;
   }
